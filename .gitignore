@@ -1,0 +1,6 @@
+/.vs
+/zadanie3/zadanie3/bin
+/zadanie3/zadanie3/obj
+*.exe
+*.sln
+*.csproj
