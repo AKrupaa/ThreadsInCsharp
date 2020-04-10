@@ -116,8 +116,6 @@ namespace zadanie3
                 }
             }
 
-            //Console.WriteLine("Dziala");
-
             // zapisz tablicę do pliku tekstowego
             array.WriteToFileTheWholeContent("tablica");
             //brawo.

@@ -82,7 +82,6 @@ namespace zadanie3
             Console.WriteLine("{0} has released the mutexNo1", Thread.CurrentThread.Name);
         }
 
-
         public void AddNoBlock(int row, int column, int value)
         {
             Console.WriteLine("{0} is requesting the mutexNo2", Thread.CurrentThread.Name);

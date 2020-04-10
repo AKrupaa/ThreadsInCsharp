@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace zadanie3
+﻿namespace zadanie3
 {
     interface ITwoDimensionalArray
     {
@@ -22,9 +18,5 @@ namespace zadanie3
             //data[index1, index2] = value;
             //set;
         }
-
-        void Add(int row, int column, int value);
-        void AddNoBlock(int row, int column, int value);
-        void WriteToFileTheWholeContent(string filename);
     }
 }
