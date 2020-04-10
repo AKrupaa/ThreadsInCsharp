@@ -6,6 +6,12 @@ namespace zadanie3
 {
     class Program
     {
+        public static void CallWhenChanged(int actualRowLenght, int actualColumnLenght)
+        {
+            Console.WriteLine("Size extended!");
+            Console.WriteLine("Actual size of array: [" + actualRowLenght + ", " + actualColumnLenght + "]");
+        }
+
         static void Main(string[] args)
         {
             // tu utworz obiekt klasy implementujacej tablicę dwuwymiarową do przechowywania liczb typu int
@@ -25,9 +31,7 @@ namespace zadanie3
             mainThread.Name = "Main Thread";
 
             // subscribe
-            // I am creating a delegate (pointer) to HandleSomethingHappened
-            // and adding it to myDelegate's list of "Event Handlers".
-            array.MyDelegate += new Array.Delegate(array.HandleSomethingHappened);
+            array.delegateWithParams += new DelegateWithParams(CallWhenChanged);
 
             // zapisz w zakresie
             //array[1, 1] = 11;

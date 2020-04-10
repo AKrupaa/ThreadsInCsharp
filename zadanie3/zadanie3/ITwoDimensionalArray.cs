@@ -25,7 +25,6 @@ namespace zadanie3
 
         void Add(int row, int column, int value);
         void AddNoBlock(int row, int column, int value);
-        void HandleSomethingHappened();
         void WriteToFileTheWholeContent(string filename);
     }
 }

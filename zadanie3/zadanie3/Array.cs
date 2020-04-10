@@ -1,13 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
 using System.Threading;
 
 namespace zadanie3
 {
+    // POPRAWKA WNIESIONA @ 10-04
+    public delegate void DelegateWithParams(int actualRowLenght, int actualColumnLenght);
+
     //Napisać klasę implementującą tablicę dwuwymiarową do przechowywania liczb typu int.
     class Array : ITwoDimensionalArray
     {
@@ -21,29 +21,9 @@ namespace zadanie3
         // Tablica posiada właściwość tylko do odczytu zwracającą jej rozmiar.
         private int columnLenght;
         private int[,] array;
-        private const int defaultCapacity = 2;
+        private const int defaultCapacity = 0;
 
-        // string showing actual size of array
-        private string typeCastingSizeOfArray = "";
-
-
-        // https://www.youtube.com/watch?v=TdiN18PR4zk
-        // https://stackoverflow.com/questions/803242/understanding-events-and-event-handlers-in-c-sharp
-        // This delegate can be used to point to methods
-        // which return void and take no param.
-        public delegate void Delegate();
-
-        // This event can cause any method which conforms
-        // to Delegate to be called.
-        public event Delegate MyDelegate;
-
-        //Tablica posiada zdarzenie (event), które jest wywoływane w momencie jej rozszerzenia.
-        //Argumentem jest aktualny rozmiar.
-        public void HandleSomethingHappened()
-        {
-            typeCastingSizeOfArray = "[" + rowLenght + "," + columnLenght + "]";
-            Console.WriteLine("Actual size: " + typeCastingSizeOfArray);
-        }
+        public event DelegateWithParams delegateWithParams;
 
         //W momencie utworzenia podawany jest rozmiar.
         //dodałem standardowy rozmiar, a co.
@@ -79,6 +59,7 @@ namespace zadanie3
         // Przypisuje wartosc w zakresie tablicy lub rozszerza rozmiar tablicy i przypisuje wartosc
         public void Add(int row, int column, int value)
         {
+            // stopwatch - logować czas oczekiwania na dostęp
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
             // zablokuj dostęp do metody na czas trwania całej metody dla tylko i wyłącznie jednego wątku
@@ -124,13 +105,7 @@ namespace zadanie3
                 rowLenght = rowExtended;
                 columnLenght = columnExtended;
 
-                // In this case we INVOKE the Delegate
-                // it mean that he RISE a signal to others, that something happened
-                //if (MyDelegate != null)
-                //    MyDelegate();
-
-                //krotszy zapis \/
-                MyDelegate?.Invoke();
+                delegateWithParams?.Invoke(rowLenght, columnLenght);
 
                 // do odpowiedniej komorki array (rozszerzonej, teraz: oryginalnej) wpisz wartosc pobraną
                 // instrukcja dla -> nie jest przekroczony :)
@@ -194,7 +169,7 @@ namespace zadanie3
                     //    MyDelegate();
 
                     //krotszy zapis \/
-                    MyDelegate?.Invoke();
+                    delegateWithParams?.Invoke(rowLenght, columnLenght);
 
                     // do odpowiedniej komorki array (rozszerzonej, teraz: oryginalnej) wpisz wartosc pobraną
                     // instrukcja dla -> nie jest przekroczony :)
@@ -248,6 +223,11 @@ namespace zadanie3
                 
             }
             Console.WriteLine("Check your Desktop :-)");
+        }
+
+        private void sum()
+        {
+
         }
     }
 }
