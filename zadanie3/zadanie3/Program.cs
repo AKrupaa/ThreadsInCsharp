@@ -4,6 +4,13 @@ using System.Threading;
 
 namespace zadanie3
 {
+    // POPRAWKA WNIESIONA @ 10-04
+    // Zgodnie z poleceniem:
+    // - poprawiłem błędy z drugiego zadania tj.: 
+    //          -- delegat ma być globalny oraz posiadać argumenty
+    //          -- podpinam go pod CallWhenChanged(...)
+    // - w metodzie Add i AddNoBlock (Array.cs) wyodrębniłem wspólną część kodu
+    //   i umieściłem w prywatnej metodzie Sum (Array.cs)
     class Program
     {
         public static void CallWhenChanged(int actualRowLenght, int actualColumnLenght)
